@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @user = User.find_by(id: params[:id])
       render json: @user
     else
-      render json: 'User not found'
+      render json: I18n.t('users.not_found')
     end
   end
 
@@ -16,9 +16,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: 'User created successfully'
+      render json: I18n.t('users.created_successfully')
     else
-      render json: 'User creation failed'
+      render json: I18n.t('users.creation_failed')
     end
   end
 
@@ -29,24 +29,23 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    if @user
-      if @user.update(user_params)
-        render json: @user
-      else
-        render json: 'Update unsuccessful'
-      end
+
+    if @user&.update(user_params)
+      render json: @user
+    elsif @user
+      render json: I18n.t('users.update_unsuccessful')
     else
-      render json: 'User not found'
+      render json: I18n.t('users.not_found')
     end
   end
 
   def destroy
     @user = User.find_by(id: params[:id])
-    if @user
-      @user.destroy
-      render json: 'User deleted successfully'
+
+    if @user&.destroy
+      render json: I18n.t('users.deleted_successfully')
     else
-      render json: 'User not found'
+      render json: I18n.t('users.not_found')
     end
   end
 
