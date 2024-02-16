@@ -30,4 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  success:
+    messages:
+      user:
+        create: "User was successfully created."
+        update: "User was successfully updated."
+  errors:
+    messages:
+      user:
+        create: "Error creating user."
+        update: "Error updating user."
+        not_found: "User not found."
